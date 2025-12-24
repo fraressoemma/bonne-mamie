@@ -66,8 +66,7 @@ export default function App() {
                 <p className="hero-subtitle">Recettes de Famille</p>
                 <h1 className="hero-title">Bibi Cooking</h1>
                 <p className="hero-description">
-                    Les recettes secrètes de la famille (enfin, plus si secrètes que ça maintenant).
-                    Si c'est raté, on accuse la connexion internet. 🍕
+                    On est tous fans de la cuisine de Mamie, alors voici l'occasion de ne pas perdre les bonnes choses.
                 </p>
             </div>
         </section>
