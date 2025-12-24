@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonne Mamie - Démo Live</title>
+
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/index.css">
+    <style>
+        /* Fixes for demo mode */
+        body {
+            padding-top: 0;
+        }
+
+        .loading {
+            min-height: 50vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // --- SERVICES ---
+        const SHEET_URL = 'https://api.sheetbest.com/sheets/e2b6b028-9aed-4f7e-a47b-b8c26a9e9261';
+
+        // Mock data from sheetApi.js
+        function getDemoRecipes() {
+            return [
+                {
+                    id: '1',
+                    titre: 'Tarte aux Pommes de Mamie',
+                    auteur: 'Mamie Jeanne',
+                    photo: '',
+                    ingredients: [
+                        { quantite: 6, unite: 'pièces', nom: 'Pommes Golden' },
+                        { quantite: 250, unite: 'g', nom: 'Farine' },
+                        { quantite: 125, unite: 'g', nom: 'Beurre' },
+                        { quantite: 100, unite: 'g', nom: 'Sucre' },
+                        { quantite: 1, unite: 'pincée', nom: 'Sel' },
+                        { quantite: 1, unite: 'sachet', nom: 'Sucre vanillé' }
+                    ],
+                    etapes: "1. Préparez la pâte : mélangez la farine, le beurre mou, le sucre et le sel jusqu'à obtenir une texture sableuse.\n\n2. Ajoutez un peu d'eau froide et formez une boule. Laissez reposer 30 minutes au frais.\n\n3. Préchauffez le four à 180°C.\n\n4. Étalez la pâte et garnissez un moule à tarte beurré.\n\n5. Épluchez et coupez les pommes en fines tranches.\n\n6. Disposez les pommes en rosace sur la pâte.\n\n7. Saupoudrez de sucre vanillé et enfournez 35-40 minutes.\n\n8. Servez tiède avec une boule de glace vanille !",
+                    portions: 8,
+                    createdAt: '2024-01-15'
+                },
+                {
+                    id: '2',
+                    titre: 'Blanquette de Veau Traditionnelle',
+                    auteur: 'Papi Maurice',
+                    photo: '',
+                    ingredients: [
+                        { quantite: 1.2, unite: 'kg', nom: 'Épaule de veau' },
+                        { quantite: 2, unite: 'pièces', nom: 'Carottes' },
+                        { quantite: 1, unite: 'pièce', nom: 'Poireau' },
+                        { quantite: 200, unite: 'g', nom: 'Champignons de Paris' },
+                        { quantite: 200, unite: 'ml', nom: 'Crème fraîche' },
+                        { quantite: 2, unite: 'pièces', nom: 'Jaunes d\'œufs' },
+                        { quantite: 1, unite: 'bouquet', nom: 'Bouquet garni' }
+                    ],
+                    etapes: "1. Découpez le veau en gros cubes et faites-le blanchir 5 minutes dans l'eau bouillante.\n\n2. Égouttez et rincez la viande. Remettez-la dans une cocotte avec de l'eau froide.\n\n3. Ajoutez les carottes, le poireau, le bouquet garni. Salez légèrement.\n\n4. Laissez mijoter à feu doux pendant 1h30.\n\n5. Faites sauter les champignons à part.\n\n6. Préparez la sauce : mélangez les jaunes d'œufs avec la crème.\n\n7. Retirez la viande, filtrez le bouillon et incorporez la liaison crème-œufs hors du feu.\n\n8. Servez la viande nappée de sauce avec du riz basmati.",
+                    portions: 6,
+                    createdAt: '2024-02-20'
+                },
+                {
+                    id: '3',
+                    titre: 'Clafoutis aux Cerises',
+                    auteur: 'Tante Marie',
+                    photo: '',
+                    ingredients: [
+                        { quantite: 500, unite: 'g', nom: 'Cerises fraîches' },
+                        { quantite: 100, unite: 'g', nom: 'Farine' },
+                        { quantite: 100, unite: 'g', nom: 'Sucre' },
+                        { quantite: 3, unite: 'pièces', nom: 'Œufs' },
+                        { quantite: 250, unite: 'ml', nom: 'Lait entier' },
+                        { quantite: 1, unite: 'c. à soupe', nom: 'Extrait de vanille' }
+                    ],
+                    etapes: "1. Préchauffez le four à 180°C.\n\n2. Lavez et équeutez les cerises (gardez les noyaux pour plus de saveur).\n\n3. Battez les œufs avec le sucre jusqu'à blanchiment.\n\n4. Incorporez la farine tamisée, puis le lait progressivement.\n\n5. Ajoutez l'extrait de vanille.\n\n6. Beurrez un plat à gratin et disposez les cerises.\n\n7. Versez l'appareil par-dessus.\n\n8. Enfournez 40-45 minutes jusqu'à ce que le dessus soit doré.\n\n9. Saupoudrez de sucre glace avant de servir.",
+                    portions: 6,
+                    createdAt: '2024-03-10'
+                }
+            ];
+        }
+
+        async function getRecipes() {
+            if (!SHEET_URL) {
+                return new Promise(resolve => setTimeout(() => resolve(getDemoRecipes()), 800));
+            }
+
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) throw new Error('Erreur réseau');
+                const data = await response.json();
+
+                // Si le sheet est vide, retourner les démos
+                if (!data || data.length === 0) {
+                    return getDemoRecipes();
+                }
+
+                // Parser les ingrédients JSON
+                return data.map(recipe => ({
+                    ...recipe,
+                    ingredients: parseIngredients(recipe.ingredients),
+                    portions: parseInt(recipe.portions) || 4
+                }));
+            } catch (error) {
+                console.error('Erreur API:', error);
+                return getDemoRecipes();
+            }
+        }
+
+        function parseIngredients(str) {
+            if (!str) return [];
+            try { return JSON.parse(str); }
+            catch { return []; }
+        }
+
+        async function addRecipe(recipe) {
+            if (!SHEET_URL) {
+                return new Promise(resolve => setTimeout(() => resolve(recipe), 800));
+            }
+
+            try {
+                const recipeData = {
+                    id: Date.now().toString(),
+                    titre: recipe.titre,
+                    auteur: recipe.auteur,
+                    photo: recipe.photo || '',
+                    ingredients: JSON.stringify(recipe.ingredients),
+                    etapes: recipe.etapes,
+                    portions: recipe.portions.toString(),
+                    createdAt: new Date().toISOString()
+                };
+
+                const response = await fetch(SHEET_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(recipeData)
+                });
+
+                if (!response.ok) throw new Error('Erreur lors de l\'envoi');
+                return await response.json();
+            } catch (error) {
+                console.error('Erreur ajout:', error);
+                throw error;
+            }
+        }
+
+        // --- COMPONENTS ---
+
+        // Header
+        function Header({ currentPage, onNavigate }) {
+            return (
+                <header className="header">
+                    <div className="header-content">
+                        <h1 className="header-title">Bonne Mamie</h1>
+                        <nav className="nav">
+                            <button
+                                className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
+                                onClick={() => onNavigate('home')}
+                            >
+                                📖 Recettes
+                            </button>
+                            <button
+                                className={`nav-link ${currentPage === 'add' ? 'active' : ''}`}
+                                onClick={() => onNavigate('add')}
+                            >
+                                ✏️ Déposer
+                            </button>
+                        </nav>
+                    </div>
+                </header>
+            );
+        }
+
+        // RecipeCard
+        function RecipeCard({ recipe, onClick }) {
+            return (
+                <article className="recipe-card" onClick={onClick}>
+                    {recipe.photo ? (
+                        <img
+                            src={recipe.photo}
+                            alt={recipe.titre}
+                            className="recipe-card-image"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'flex';
+                            }}
+                        />
+                    ) : null}
+                    <div
+                        className="recipe-card-image-placeholder"
+                        style={{ display: recipe.photo ? 'none' : 'flex' }}
+                    >
+                        🍽️
+                    </div>
+                    <div className="recipe-card-content">
+                        <h3 className="recipe-card-title">{recipe.titre}</h3>
+                        <p className="recipe-card-author">{recipe.auteur}</p>
+                    </div>
+                </article>
+            );
+        }
+
+        // RecipeDetail
+        function RecipeDetail({ recipe, onBack }) {
+            const [portions, setPortions] = React.useState(recipe.portions || 4);
+
+            const ratio = React.useMemo(() => {
+                return portions / (recipe.portions || 4);
+            }, [portions, recipe.portions]);
+
+            const formatQuantity = (qty) => {
+                const calculated = qty * ratio;
+                if (calculated === Math.floor(calculated)) {
+                    return calculated;
+                }
+                return calculated.toFixed(1).replace(/\.0$/, '');
+            };
+
+            const decreasePortions = () => {
+                if (portions > 1) setPortions(p => p - 1);
+            };
+
+            const increasePortions = () => {
+                if (portions < 50) setPortions(p => p + 1);
+            };
+
+            return (
+                <div className="container">
+                    <button className="back-btn" onClick={onBack}>
+                        ← Retour aux recettes
+                    </button>
+
+                    <article className="recipe-detail">
+                        <header className="recipe-detail-header">
+                            {recipe.photo ? (
+                                <img
+                                    src={recipe.photo}
+                                    alt={recipe.titre}
+                                    className="recipe-detail-image"
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                        e.target.nextSibling.style.display = 'flex';
+                                    }}
+                                />
+                            ) : null}
+                            <div
+                                className="recipe-detail-image-placeholder"
+                                style={{ display: recipe.photo ? 'none' : 'flex' }}
+                            >
+                                🍳
+                            </div>
+                        </header>
+
+                        <div className="recipe-detail-body">
+                            <h1 className="recipe-detail-title">{recipe.titre}</h1>
+
+                            <div className="recipe-detail-meta">
+                                <span className="recipe-detail-author">
+                                    ✍️ Par {recipe.auteur}
+                                </span>
+
+                                <div className="portion-calculator">
+                                    <button
+                                        className="portion-btn"
+                                        onClick={decreasePortions}
+                                        disabled={portions <= 1}
+                                    >
+                                        −
+                                    </button>
+                                    <span className="portion-text">
+                                        {portions} {portions > 1 ? 'personnes' : 'personne'}
+                                    </span>
+                                    <button
+                                        className="portion-btn"
+                                        onClick={increasePortions}
+                                        disabled={portions >= 50}
+                                    >
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+
+                            <section className="ingredients-section">
+                                <h3>🥕 Ingrédients</h3>
+                                <ul className="ingredients-list">
+                                    {recipe.ingredients && recipe.ingredients.map((ing, index) => (
+                                        <li key={index} className="ingredient-item">
+                                            <span className="ingredient-qty">
+                                                {formatQuantity(ing.quantite)} {ing.unite}
+                                            </span>
+                                            <span className="ingredient-name">{ing.nom}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
+
+                            <section className="steps-section">
+                                <h3>👩‍🍳 Préparation</h3>
+                                <div className="steps-content">
+                                    {recipe.etapes}
+                                </div>
+                            </section>
+                        </div>
+                    </article>
+                </div>
+            );
+        }
+
+        // RecipeForm
+        function RecipeForm({ onSuccess }) {
+            const UNITS = ['g', 'kg', 'ml', 'L', 'cl', 'c. à soupe', 'c. à café', 'pièces', 'tranches', 'pincée', 'sachet', 'bouquet'];
+
+            const [formData, setFormData] = React.useState({
+                titre: '', author: '', photo: '', etapes: '', portions: 4
+            });
+            const [ingredients, setIngredients] = React.useState([{ quantite: '', unite: 'g', nom: '' }]);
+            const [loading, setLoading] = React.useState(false);
+            const [message, setMessage] = React.useState(null);
+
+            const handleChange = (e) => {
+                const { name, value } = e.target;
+                setFormData(prev => ({ ...prev, [name]: value }));
+            };
+
+            const handleIngredientChange = (index, field, value) => {
+                setIngredients(prev => {
+                    const updated = [...prev];
+                    updated[index] = { ...updated[index], [field]: value };
+                    return updated;
+                });
+            };
+
+            const addIngredient = () => setIngredients(prev => [...prev, { quantite: '', unite: 'g', nom: '' }]);
+
+            const removeIngredient = (index) => {
+                if (ingredients.length > 1) setIngredients(prev => prev.filter((_, i) => i !== index));
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setLoading(true);
+                try {
+                    const validIngredients = ingredients.filter(ing => ing.nom.trim() !== '').map(ing => ({ ...ing, quantite: parseFloat(ing.quantite) || 0 }));
+                    if (validIngredients.length === 0) throw new Error('Ajoutez au moins un ingrédient');
+
+                    await addRecipe({ ...formData, ingredients: validIngredients });
+                    setMessage({ type: 'success', text: '🎉 Recette ajoutée (Mode Démo)' });
+                    setFormData({ titre: '', author: '', photo: '', etapes: '', portions: 4 });
+                    setIngredients([{ quantite: '', unite: 'g', nom: '' }]);
+                    if (onSuccess) onSuccess();
+                } catch (error) {
+                    setMessage({ type: 'error', text: `❌ Erreur: ${error.message}` });
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            return (
+                <div className="form-container">
+                    <h2 className="page-title">Déposer une Recette</h2>
+                    {message && <div className={`message message-${message.type}`}>{message.text}</div>}
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label className="form-label">Nom de la recette *</label>
+                            <input type="text" name="titre" className="form-input" value={formData.titre} onChange={handleChange} required />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label">Votre nom *</label>
+                            <input type="text" name="auteur" className="form-input" value={formData.auteur} onChange={handleChange} required />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label">Photo (URL)</label>
+                            <input type="url" name="photo" className="form-input" value={formData.photo} onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label">Portions</label>
+                            <input type="number" name="portions" className="form-input" value={formData.portions} onChange={handleChange} min="1" style={{ width: '100px' }} />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label">Ingrédients *</label>
+                            <div className="ingredients-module">
+                                {ingredients.map((ing, i) => (
+                                    <div key={i} className="ingredient-row">
+                                        <input type="number" className="form-input" value={ing.quantite} onChange={e => handleIngredientChange(i, 'quantite', e.target.value)} placeholder="Qté" />
+                                        <select className="form-select" value={ing.unite} onChange={e => handleIngredientChange(i, 'unite', e.target.value)}>{UNITS.map(u => <option key={u} value={u}>{u}</option>)}</select>
+                                        <input type="text" className="form-input" value={ing.nom} onChange={e => handleIngredientChange(i, 'nom', e.target.value)} placeholder="Nom" />
+                                        <button type="button" className="remove-ingredient-btn" onClick={() => removeIngredient(i)}>×</button>
+                                    </div>
+                                ))}
+                                <button type="button" className="add-ingredient-btn" onClick={addIngredient}>➕ Ajouter</button>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label">Préparation *</label>
+                            <textarea name="etapes" className="form-textarea" value={formData.etapes} onChange={handleChange} required></textarea>
+                        </div>
+                        <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%' }}>{loading ? 'Envoi...' : '📝 Enregistrer'}</button>
+                    </form>
+                </div>
+            );
+        }
+
+        // App
+        function App() {
+            const [currentPage, setCurrentPage] = React.useState('home');
+            const [recipes, setRecipes] = React.useState([]);
+            const [selectedRecipe, setSelectedRecipe] = React.useState(null);
+            const [loading, setLoading] = React.useState(true);
+
+            React.useEffect(() => { loadRecipes(); }, []);
+
+            const loadRecipes = async () => {
+                setLoading(true);
+                const data = await getRecipes();
+                setRecipes(data);
+                setLoading(false);
+            };
+
+            const handleViewRecipe = (r) => { setSelectedRecipe(r); setCurrentPage('detail'); };
+            const handleBack = () => { setSelectedRecipe(null); setCurrentPage('home'); };
+            const handleNavigate = (p) => { setCurrentPage(p); setSelectedRecipe(null); };
+
+            return (
+                <React.Fragment>
+                    <Header currentPage={currentPage} onNavigate={handleNavigate} />
+                    <main className="main">
+                        {currentPage === 'detail' && selectedRecipe ? (
+                            <RecipeDetail recipe={selectedRecipe} onBack={handleBack} />
+                        ) : currentPage === 'add' ? (
+                            <div className="container"><RecipeForm onSuccess={() => { loadRecipes(); setTimeout(() => setCurrentPage('home'), 1500); }} /></div>
+                        ) : (
+                            <div className="container">
+                                <h2 className="page-title">Nos Recettes de Famille</h2>
+                                {loading ? <div className="loading"><div className="loading-spinner"></div></div> : (
+                                    <div className="recipes-grid">
+                                        {recipes.map(r => <RecipeCard key={r.id} recipe={r} onClick={() => handleViewRecipe(r)} />)}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </main>
+                    <footer className="footer"><p className="footer-text">🍳 Bonne Mamie — Démo Live</p></footer>
+                </React.Fragment>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+import React from 'react';
+
+/**
+ * Composant Header luxueux avec navigation
+ */
+export default function Header({ currentPage, onNavigate }) {
+    return (
+        <header className="header">
+            <div className="header-content">
+                <h1 className="header-title">Bonne Mamie</h1>
+                <nav className="nav">
+                    <button
+                        className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
+                        onClick={() => onNavigate('home')}
+                    >
+                        Collection
+                    </button>
+                    <button
+                        className={`nav-link ${currentPage === 'add' ? 'active' : ''}`}
+                        onClick={() => onNavigate('add')}
+                    >
+                        Nouvelle Recette
+                    </button>
+                </nav>
+            </div>
+        </header>
+    );
+}
