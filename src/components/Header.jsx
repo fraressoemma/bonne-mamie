@@ -14,7 +14,7 @@ export default function Header({ currentPage, onNavigate }) {
                         onClick={() => onNavigate('home')}
                     >
                         <span className="nav-icon">✦</span>
-                        Collection
+                        Nos recettes
                     </button>
                     <button
                         className={`nav-link ${currentPage === 'add' ? 'active' : ''}`}

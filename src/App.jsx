@@ -98,7 +98,7 @@ export default function App() {
             <>
                 <HeroSection />
                 <div className="container">
-                    <h2 className="page-title">Notre Collection</h2>
+                    <h2 className="page-title">Nos Recettes</h2>
 
                     {loading && (
                         <div className="loading">
