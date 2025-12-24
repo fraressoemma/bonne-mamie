@@ -6,7 +6,7 @@ import RecipeDetail from './components/RecipeDetail';
 import { getRecipes } from './services/sheetApi';
 
 /**
- * Application Bonne Mamie - Design Luxe & Élégant
+ * Application Bibi Cooking - Design Luxe & Élégant
  */
 export default function App() {
     const [currentPage, setCurrentPage] = useState('home');
@@ -64,7 +64,7 @@ export default function App() {
             <div className="hero-overlay" />
             <div className="hero-content">
                 <p className="hero-subtitle">Recettes de Famille</p>
-                <h1 className="hero-title">Bonne Mamie</h1>
+                <h1 className="hero-title">Bibi Cooking</h1>
                 <p className="hero-description">
                     Un précieux héritage culinaire transmis de génération en génération.
                     Découvrez les recettes qui ont bercé notre famille.
@@ -161,7 +161,7 @@ export default function App() {
             </main>
             <footer className="footer">
                 <p className="footer-text">
-                    Bonne Mamie — Recettes de famille avec amour
+                    Bibi Cooking — Recettes de famille avec amour
                 </p>
             </footer>
         </>

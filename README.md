@@ -1,4 +1,4 @@
-# Bonne Mamie - Setup Guide
+# Bibi Cooking - Setup Guide
 
 ## Configuration Google Sheets
 
