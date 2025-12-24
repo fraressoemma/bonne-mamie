@@ -13,12 +13,14 @@ export default function Header({ currentPage, onNavigate }) {
                         className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
                         onClick={() => onNavigate('home')}
                     >
+                        <span className="nav-icon">✦</span>
                         Collection
                     </button>
                     <button
                         className={`nav-link ${currentPage === 'add' ? 'active' : ''}`}
                         onClick={() => onNavigate('add')}
                     >
+                        <span className="nav-icon">+</span>
                         Nouvelle Recette
                     </button>
                 </nav>
