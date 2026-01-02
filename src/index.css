@@ -324,7 +324,8 @@ a:hover {
   height: 70vh;
   min-height: 500px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  /* Text at bottom */
   justify-content: center;
   margin-bottom: var(--spacing-xxxl);
   overflow: hidden;
@@ -336,8 +337,9 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('/background.jpg') center center / cover no-repeat;
-  filter: grayscale(30%);
+  background: url('/background_retro.jpg') center center / cover no-repeat;
+  filter: sepia(30%) contrast(1.1);
+  /* Add retro filter */
   transform: scale(1.1);
   transition: transform var(--transition-slow);
 }
