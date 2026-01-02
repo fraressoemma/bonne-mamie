@@ -389,10 +389,12 @@ a:hover {
 
 .hero-description {
   font-size: 1.1rem;
-  color: var(--color-light-gray);
+  color: var(--color-medium-gray);
+  /* Orange Buffalo */
   max-width: 600px;
   margin: 0 auto;
-  font-weight: 300;
+  font-weight: 700;
+  /* Increased weight for visibility */
 }
 
 /* ========== Page Title ========== */
