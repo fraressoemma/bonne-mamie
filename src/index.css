@@ -7,19 +7,26 @@
 
 /* ========== CSS Variables ========== */
 :root {
-  /* Couleurs luxueuses */
-  --color-black: #0a0a0a;
-  --color-charcoal: #1a1a1a;
-  --color-dark-gray: #2d2d2d;
-  --color-medium-gray: #4a4a4a;
-  --color-light-gray: #8a8a8a;
-  --color-cream: #f5f0e8;
+  /* Palette Red Chicory */
+  --color-black: #A73D4D;
+  /* Main Background: Red Chicory */
+  --color-charcoal: #963543;
+  /* Slightly darker Red for contrast/cards */
+  --color-dark-gray: #4d1821;
+  --color-medium-gray: #E85D34;
+  /* Accent: Buffalo Sauce */
+  --color-light-gray: #F2F0E4;
+  /* Text secondary: Breezy Beige */
+  --color-cream: #F2F0E4;
+  /* Text primary: Breezy Beige */
   --color-white: #ffffff;
 
-  /* Accent doré */
-  --color-gold: #c9a962;
-  --color-gold-light: #dfc88a;
-  --color-gold-dark: #a88a3d;
+  /* Accent Mustard / Gold */
+  --color-gold: #E1CF72;
+  /* Mustard Oil */
+  --color-gold-light: #F2F0E4;
+  /* Breezy Beige for hover */
+  --color-gold-dark: #ccb955;
 
   /* Overlay */
   --color-overlay: rgba(10, 10, 10, 0.85);
@@ -157,12 +164,12 @@ a:hover {
   right: 0;
   z-index: 1000;
   padding: var(--spacing-sm) 0;
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0) 100%);
+  background: linear-gradient(180deg, rgba(167, 61, 77, 0.95) 0%, rgba(167, 61, 77, 0) 100%);
   transition: background var(--transition-smooth);
 }
 
 .header.scrolled {
-  background: rgba(10, 10, 10, 0.98);
+  background: rgba(167, 61, 77, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -333,9 +340,9 @@ a:hover {
   right: 0;
   bottom: 0;
   background: linear-gradient(180deg,
-      rgba(10, 10, 10, 0.4) 0%,
-      rgba(10, 10, 10, 0.7) 50%,
-      rgba(10, 10, 10, 0.95) 100%);
+      rgba(167, 61, 77, 0.4) 0%,
+      rgba(167, 61, 77, 0.7) 50%,
+      rgba(167, 61, 77, 0.95) 100%);
 }
 
 .hero-content {
