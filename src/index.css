@@ -156,7 +156,7 @@ a:hover {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: var(--spacing-lg) 0;
+  padding: var(--spacing-sm) 0;
   background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0) 100%);
   transition: background var(--transition-smooth);
 }
