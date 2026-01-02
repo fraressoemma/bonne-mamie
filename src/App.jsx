@@ -63,10 +63,21 @@ export default function App() {
             <div className="hero-background" />
             <div className="hero-overlay" />
             <div className="hero-content">
-                <p className="hero-subtitle">Recettes de Famille</p>
-                <p className="hero-description">
-                    On est tous fans de la cuisine de Mamie, alors voici l'occasion de ne pas perdre les bonnes choses.
-                </p>
+                <div className="hero-buttons">
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => handleNavigate('home')}
+                    >
+                        Nos recettes
+                    </button>
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => handleNavigate('add')}
+                        style={{ marginLeft: '1rem' }}
+                    >
+                        Nouvelle Recette
+                    </button>
+                </div>
             </div>
         </section>
     );
