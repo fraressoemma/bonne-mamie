@@ -3,7 +3,8 @@
    Ambiance: Sophistiquée, Intime, Premium
    ========================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.cdnfonts.com/css/akrobat');
 
 /* ========== CSS Variables ========== */
 :root {
@@ -27,7 +28,7 @@
   --color-glass-border: rgba(255, 255, 255, 0.1);
 
   /* Typographie */
-  --font-title: 'Bungee Shade', cursive;
+  --font-title: 'Akrobat', sans-serif;
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Montserrat', -apple-system, sans-serif;
 
@@ -372,10 +373,11 @@ a:hover {
 .hero-title {
   font-family: var(--font-title);
   font-size: 5rem;
-  font-weight: 300;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   margin-bottom: var(--spacing-lg);
   color: var(--color-gold);
-  /* background: none; removed gradient text for Bungee Shade better visibility */
 }
 
 .hero-description {
