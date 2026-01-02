@@ -7,7 +7,7 @@ export default function Header({ currentPage, onNavigate }) {
     return (
         <header className="header">
             <div className="header-content">
-                <h1 className="header-title">Bibi Cooking</h1>
+                <img src="/logo_bibi.png" alt="Bibi Cooking" className="header-logo" />
                 <nav className="nav">
                     <button
                         className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}

@@ -176,32 +176,17 @@ a:hover {
   padding: 0 var(--spacing-xl);
 }
 
-.header-title {
-  font-family: var(--font-heading);
-  color: var(--color-cream);
-  font-size: 1.8rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
+.header-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) sepia(100%) saturate(100%) hue-rotate(0deg) brightness(1.2);
+  /* Tinting to gold/cream if needed, but original image might be colored. Let's just keep it clean or apply slight shadow. Given user provided image, let's just size it. */
+  transition: transform var(--transition-fast);
 }
 
-.header-title::before {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold));
-}
-
-.header-title::after {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 1px;
-  background: linear-gradient(90deg, var(--color-gold), transparent);
+.header-logo:hover {
+  transform: scale(1.05);
 }
 
 .nav {
@@ -371,14 +356,17 @@ a:hover {
   font-weight: 400;
 }
 
-.hero-title {
-  font-family: var(--font-title);
-  font-size: 5rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  line-height: 1;
+.hero-logo {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
   margin-bottom: var(--spacing-lg);
-  color: var(--color-gold);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+  transition: transform var(--transition-slow);
+}
+
+.hero-logo:hover {
+  transform: scale(1.02);
 }
 
 .hero-description {
