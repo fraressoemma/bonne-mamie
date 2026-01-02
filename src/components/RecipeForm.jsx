@@ -195,14 +195,28 @@ export default function RecipeForm({ onSuccess }) {
                         </div>
                     )}
 
-                    <input
-                        type="file"
-                        id="photo-upload"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        className="form-input"
-                        style={{ padding: '10px' }}
-                    />
+                    <div className="file-upload-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <label
+                            htmlFor="photo-upload"
+                            className="btn btn-secondary"
+                            style={{
+                                cursor: 'pointer',
+                                width: '100%',
+                                justifyContent: 'center',
+                                borderStyle: 'dashed'
+                            }}
+                        >
+                            {selectedFile ? `📷 Changer la photo (${selectedFile.name.substring(0, 15)}...)` : '📷 Choisir une belle photo'}
+                        </label>
+                        <input
+                            type="file"
+                            id="photo-upload"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            className="form-input"
+                            style={{ display: 'none' }}
+                        />
+                    </div>
                     <small style={{ color: '#888', marginTop: '5px', display: 'block' }}>
                         Image hébergée gratuitement par ImgBB (max 32Mo)
                     </small>
