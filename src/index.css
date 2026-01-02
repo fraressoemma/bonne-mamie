@@ -214,25 +214,29 @@ a:hover {
   color: var(--color-black);
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 12px 24px;
+  padding: 8px 16px;
   position: relative;
   transition: all var(--transition-fast);
-  border: 2px solid var(--color-gold);
-  border-radius: 50px;
+  border: 2px solid var(--color-black);
+  /* Red Border */
+  border-radius: 4px;
+  /* Sharp corners */
   background: var(--color-cream);
-  box-shadow: 4px 4px 0px var(--color-black);
+  box-shadow: 4px 4px 0px var(--color-medium-gray);
+  /* Orange Shadow */
   cursor: pointer;
-  margin-left: 8px;
+  margin-left: 12px;
 }
 
 /* Effet Hover Pop */
 .nav-link:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--color-charcoal);
-  background: var(--color-gold);
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0px var(--color-medium-gray);
+  /* Orange Shadow */
+  background: var(--color-white);
   color: var(--color-black);
   border-color: var(--color-black);
 }
@@ -895,28 +899,34 @@ a:hover {
   transform: scale(1.1);
 }
 
-/* ========== Buttons - Retro Pop ========== */
+/* ========== Buttons - Retro Image Match ========== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-lg) var(--spacing-xxl);
-  border: 3px solid transparent;
-  border-radius: 50px;
+  padding: 10px 20px;
+  border: 2px solid var(--color-black);
+  /* Red Border */
+  border-radius: 4px;
+  /* Sharp corners */
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all var(--transition-fast);
-  box-shadow: 4px 4px 0px var(--color-black);
+  background: var(--color-cream);
+  color: var(--color-black);
+  box-shadow: 4px 4px 0px var(--color-medium-gray);
+  /* Orange Shadow */
 }
 
 .btn:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 8px 8px 0px var(--color-black);
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0px var(--color-medium-gray);
+  background: var(--color-white);
 }
 
 /* Primary Button (Gold) */
