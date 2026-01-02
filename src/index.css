@@ -375,6 +375,7 @@ a:hover {
   font-family: var(--font-title);
   font-size: 5rem;
   font-weight: 400;
+  text-transform: uppercase;
   line-height: 1;
   margin-bottom: var(--spacing-lg);
   color: var(--color-gold);
