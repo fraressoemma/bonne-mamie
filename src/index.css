@@ -908,7 +908,7 @@ a:hover {
   padding: var(--spacing-lg);
   margin-top: var(--spacing-lg);
   background: var(--color-black);
-  border: 3px dashed var(--color-gold);
+  border: 2px solid var(--color-gold);
   border-radius: var(--border-radius-lg);
   color: var(--color-gold);
   font-family: var(--font-body);
