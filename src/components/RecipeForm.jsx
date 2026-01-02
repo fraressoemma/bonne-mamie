@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addRecipe } from '../services/sheetApi';
+import { uploadImage } from '../services/imgbbApi';
 
 const UNITS = [
     'g', 'kg', 'ml', 'L', 'cl',
@@ -15,22 +16,37 @@ export default function RecipeForm({ onSuccess }) {
     const [formData, setFormData] = useState({
         titre: '',
         auteur: '',
-        photo: '',
+        photo: '', // URL finale de la photo
         etapes: '',
         portions: 4
     });
+
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
 
     const [ingredients, setIngredients] = useState([
         { quantite: '', unite: 'g', nom: '' }
     ]);
 
     const [loading, setLoading] = useState(false);
+    const [uploadingImage, setUploadingImage] = useState(false);
     const [message, setMessage] = useState(null);
 
     // Gestion des champs du formulaire
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    // Gestion du fichier image
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setSelectedFile(file);
+            // Créer une URL locale pour la prévisualisation
+            const objectUrl = URL.createObjectURL(file);
+            setPreviewUrl(objectUrl);
+        }
     };
 
     // Gestion des ingrédients
@@ -71,15 +87,30 @@ export default function RecipeForm({ onSuccess }) {
                 throw new Error('Ajoutez au moins un ingrédient');
             }
 
+            let finalPhotoUrl = formData.photo;
+
+            // Upload de l'image si un fichier est sélectionné
+            if (selectedFile) {
+                setUploadingImage(true);
+                try {
+                    finalPhotoUrl = await uploadImage(selectedFile);
+                } catch (uploadError) {
+                    throw new Error(`Erreur upload photo: ${uploadError.message}`);
+                } finally {
+                    setUploadingImage(false);
+                }
+            }
+
             const recipeData = {
                 ...formData,
+                photo: finalPhotoUrl,
                 ingredients: validIngredients,
                 portions: parseInt(formData.portions) || 4
             };
 
             await addRecipe(recipeData);
 
-            setMessage({ type: 'success', text: 'Recette ajoutée avec succès' });
+            setMessage({ type: 'success', text: 'Recette ajoutée avec succès !' });
 
             // Reset du formulaire
             setFormData({
@@ -90,6 +121,8 @@ export default function RecipeForm({ onSuccess }) {
                 portions: 4
             });
             setIngredients([{ quantite: '', unite: 'g', nom: '' }]);
+            setSelectedFile(null);
+            setPreviewUrl(null);
 
             if (onSuccess) {
                 setTimeout(onSuccess, 1500);
@@ -146,20 +179,33 @@ export default function RecipeForm({ onSuccess }) {
                     />
                 </div>
 
-                {/* Photo URL */}
+                {/* Photo Upload */}
                 <div className="form-group">
-                    <label className="form-label" htmlFor="photo">
-                        Photo (URL)
+                    <label className="form-label" htmlFor="photo-upload">
+                        Photo de la recette
                     </label>
+
+                    {previewUrl && (
+                        <div className="image-preview" style={{ marginBottom: '1rem', borderRadius: '12px', overflow: 'hidden' }}>
+                            <img
+                                src={previewUrl}
+                                alt="Prévisualisation"
+                                style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                            />
+                        </div>
+                    )}
+
                     <input
-                        type="url"
-                        id="photo"
-                        name="photo"
+                        type="file"
+                        id="photo-upload"
+                        accept="image/*"
+                        onChange={handleFileChange}
                         className="form-input"
-                        value={formData.photo}
-                        onChange={handleChange}
-                        placeholder="https://exemple.com/ma-photo.jpg"
+                        style={{ padding: '10px' }}
                     />
+                    <small style={{ color: '#888', marginTop: '5px', display: 'block' }}>
+                        Image hébergée gratuitement par ImgBB (max 32Mo)
+                    </small>
                 </div>
 
                 {/* Portions */}
@@ -258,7 +304,7 @@ export default function RecipeForm({ onSuccess }) {
                     {loading ? (
                         <>
                             <span className="loading-spinner" style={{ width: 20, height: 20, borderWidth: 2 }}></span>
-                            Envoi en cours...
+                            {uploadingImage ? 'Envoi de la photo...' : 'Enregistrement...'}
                         </>
                     ) : (
                         <>Enregistrer la recette</>
