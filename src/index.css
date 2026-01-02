@@ -398,6 +398,29 @@ a:hover {
   margin: 0 auto;
   font-weight: 700;
   /* Increased weight for visibility */
+  /* Increased weight for visibility */
+}
+
+.hero-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--spacing-lg);
+}
+
+.hero-buttons .btn {
+  padding: 14px 32px;
+  /* Larger click area */
+  font-size: 1.1rem;
+  /* Larger text */
+  box-shadow: 6px 6px 0px var(--color-medium-gray);
+  /* Stronger shadow */
+}
+
+.hero-buttons .btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px var(--color-medium-gray);
 }
 
 /* ========== Page Title ========== */
