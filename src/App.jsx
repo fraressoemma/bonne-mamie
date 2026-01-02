@@ -64,7 +64,6 @@ export default function App() {
             <div className="hero-overlay" />
             <div className="hero-content">
                 <p className="hero-subtitle">Recettes de Famille</p>
-                <img src="/logo_bibi.png" alt="Bibi Cooking" className="hero-logo" />
                 <p className="hero-description">
                     On est tous fans de la cuisine de Mamie, alors voici l'occasion de ne pas perdre les bonnes choses.
                 </p>
