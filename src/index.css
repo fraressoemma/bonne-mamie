@@ -180,8 +180,6 @@ a:hover {
   height: 48px;
   width: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1) sepia(100%) saturate(100%) hue-rotate(0deg) brightness(1.2);
-  /* Tinting to gold/cream if needed, but original image might be colored. Let's just keep it clean or apply slight shadow. Given user provided image, let's just size it. */
   transition: transform var(--transition-fast);
 }
 
