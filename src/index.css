@@ -787,7 +787,8 @@ a:hover {
 
 /* ========== Form Styles - Retro Pop ========== */
 .form-container {
-  background: var(--color-white);
+  background: var(--color-cream);
+  /* Softened to Beige */
   border-radius: var(--border-radius-xl);
   padding: var(--spacing-xxxl);
   max-width: 900px;
@@ -797,19 +798,6 @@ a:hover {
   position: relative;
   overflow: hidden;
   /* Clip the gradients */
-
-  /* Retro Rainbow Curves */
-  background-image:
-    radial-gradient(circle at 100% 100%,
-      var(--color-gold) 0 40px,
-      var(--color-medium-gray) 40px 80px,
-      var(--color-black) 80px 120px,
-      transparent 120px),
-    radial-gradient(circle at 0% 0%,
-      var(--color-gold) 0 40px,
-      var(--color-medium-gray) 40px 80px,
-      var(--color-black) 80px 120px,
-      transparent 120px);
 }
 
 .form-container::before {
@@ -829,17 +817,16 @@ a:hover {
 }
 
 .form-group {
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
 }
 
 .form-label {
   display: block;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-black);
+  font-size: 1.1rem;
 }
 
 .form-input,
@@ -853,7 +840,8 @@ a:hover {
   font-size: 1rem;
   font-weight: 500;
   transition: all var(--transition-fast);
-  background: var(--color-cream);
+  background: var(--color-white);
+  /* Inputs white for contrast */
   color: var(--color-black);
 }
 
