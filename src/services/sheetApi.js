@@ -59,6 +59,7 @@ export async function addRecipe(recipe) {
 
         const response = await fetch(SHEET_URL, {
             method: 'POST',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
