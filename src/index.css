@@ -798,6 +798,19 @@ a:hover {
   position: relative;
   overflow: hidden;
   /* Clip the gradients */
+
+  /* Retro Rainbow Curves */
+  background-image:
+    radial-gradient(circle at 100% 100%,
+      var(--color-gold) 0 40px,
+      var(--color-medium-gray) 40px 80px,
+      var(--color-black) 80px 120px,
+      transparent 120px),
+    radial-gradient(circle at 0% 0%,
+      var(--color-gold) 0 40px,
+      var(--color-medium-gray) 40px 80px,
+      var(--color-black) 80px 120px,
+      transparent 120px);
 }
 
 .form-container::before {
