@@ -3,7 +3,7 @@
    Ambiance: Sophistiquée, Intime, Premium
    ========================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Plaster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Plaster&family=MuseoModerno:wght@300;400;500;600;700;800;900&display=swap');
 
 /* ========== CSS Variables ========== */
 :root {
@@ -429,10 +429,11 @@ a:hover {
   margin: var(--spacing-xl) 0;
   font-size: 3rem;
   color: var(--color-black);
-  font-family: var(--font-title);
-  /* Plaster for Retro Pop */
+  font-family: 'MuseoModerno', cursive;
+  /* Specific update for Title */
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
+  font-weight: 800;
   line-height: 1.1;
 }
 
