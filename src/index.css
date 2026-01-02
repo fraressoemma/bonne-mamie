@@ -247,11 +247,11 @@ a:hover {
 }
 
 .nav-link.active {
-  background: var(--color-medium-gray);
-  /* Orange Buffalo */
-  color: var(--color-gold);
-  border-color: var(--color-gold);
-  box-shadow: inset 4px 4px 0px rgba(0, 0, 0, 0.2);
+  background: var(--color-gold);
+  /* Active = Gold to stand out */
+  color: var(--color-black);
+  border-color: var(--color-black);
+  box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.2);
   transform: translate(2px, 2px);
 }
 
@@ -261,13 +261,6 @@ a:hover {
   display: none;
 }
 
-.nav-link:hover {
-  color: var(--color-gold);
-  border-color: var(--color-gold);
-  background: rgba(201, 169, 98, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(201, 169, 98, 0.15);
-}
 
 .nav-link:hover::before {
   left: 100%;
