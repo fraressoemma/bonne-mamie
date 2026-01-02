@@ -202,8 +202,7 @@ export default function RecipeForm({ onSuccess }) {
                             style={{
                                 cursor: 'pointer',
                                 width: '100%',
-                                justifyContent: 'center',
-                                borderStyle: 'dashed'
+                                justifyContent: 'center'
                             }}
                         >
                             {selectedFile ? `📷 Changer la photo (${selectedFile.name.substring(0, 15)}...)` : '📷 Choisir une belle photo'}
