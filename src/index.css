@@ -889,44 +889,53 @@ a:hover {
   transform: scale(1.1);
 }
 
-/* ========== Buttons - Luxe ========== */
+/* ========== Buttons - Retro Pop ========== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-lg) var(--spacing-xxl);
-  border: none;
-  border-radius: var(--border-radius);
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 500;
+  border: 3px solid transparent;
+  border-radius: 50px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all var(--transition-smooth);
+  transition: all var(--transition-fast);
+  box-shadow: 4px 4px 0px var(--color-black);
 }
 
+.btn:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0px var(--color-black);
+}
+
+/* Primary Button (Gold) */
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  background: var(--color-gold);
   color: var(--color-black);
-  box-shadow: var(--shadow-soft);
+  border-color: var(--color-black);
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-medium), var(--shadow-glow);
+  background: var(--color-white);
+  border-color: var(--color-black);
 }
 
+/* Secondary Button (Outline/Cream) */
 .btn-secondary {
-  background: transparent;
-  color: var(--color-gold);
-  border: 1px solid var(--color-gold);
+  background: var(--color-cream);
+  color: var(--color-black);
+  border-color: var(--color-gold);
 }
 
 .btn-secondary:hover {
-  background: var(--color-gold);
-  color: var(--color-black);
+  background: var(--color-medium-gray);
+  color: var(--color-white);
+  border-color: var(--color-white);
 }
 
 .btn:disabled {
