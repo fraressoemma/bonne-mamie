@@ -353,9 +353,9 @@ a:hover {
   right: 0;
   bottom: 0;
   background: linear-gradient(180deg,
-      rgba(167, 61, 77, 0.4) 0%,
-      rgba(167, 61, 77, 0.7) 50%,
-      rgba(167, 61, 77, 0.95) 100%);
+      rgba(167, 61, 77, 0.3) 0%,
+      rgba(242, 240, 228, 0.8) 70%,
+      rgba(242, 240, 228, 1) 100%);
 }
 
 .hero-content {
