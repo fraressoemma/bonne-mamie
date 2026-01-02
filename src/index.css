@@ -821,9 +821,11 @@ a:hover {
   font-size: 2.5rem;
   margin-bottom: var(--spacing-xxl);
   color: var(--color-black);
-  font-family: var(--font-title);
-  /* Use Plaster for retro vibe */
+  font-family: 'MuseoModerno', cursive;
+  /* Updated to MuseoModerno */
   text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.05em;
 }
 
 .form-group {
